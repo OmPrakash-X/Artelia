@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fundraiser Tracker</title>
+    
+    <script>
+        let totalFunds = parseFloat(localStorage.getItem("totalFunds")) || Math.floor(Math.random() * 5000 + 5000);
+
+        function loadFunds() {
+            document.getElementById("totalFunds").innerText = `₹${totalFunds}`;
+            let storedContributions = JSON.parse(localStorage.getItem("fundHistory")) || [];
+            let contributionsList = "";
+            storedContributions.forEach(entry => {
+                contributionsList += `<li>${entry.user} donated ₹${entry.amount} at ${new Date(entry.timestamp).toLocaleString()}</li>`;
+            });
+            document.getElementById("fundHistory").innerHTML = contributionsList || "<li>No contributions yet.</li>";
+        }
+
+        function donate() {
+            const userName = document.getElementById("userName").value.trim();
+            const donationAmount = parseFloat(document.getElementById("donationAmount").value);
+
+            if (userName === "" || isNaN(donationAmount) || donationAmount <= 0) {
+                alert("⚠️ Please enter a valid name and donation amount!");
+                return;
+            }
+
+            totalFunds += donationAmount;
+            localStorage.setItem("totalFunds", totalFunds);
+
+            let newEntry = {
+                user: userName,
+                amount: donationAmount,
+                timestamp: new Date().toISOString()
+            };
+
+            let storedContributions = JSON.parse(localStorage.getItem("fundHistory")) || [];
+            storedContributions.push(newEntry);
+            localStorage.setItem("fundHistory", JSON.stringify(storedContributions));
+
+            document.getElementById("userName").value = "";
+            document.getElementById("donationAmount").value = "";
+            loadFunds();
+        }
+
+        window.onload = loadFunds;
+    </script>
+
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+            position: relative;
+            color: white;
+        }
+
+        body::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url(./topsellingbackground.jpg) no-repeat center center/cover;
+            filter: blur(10px);
+            z-index: -1;
+        }
+
+        .fundraiser-container {
+            max-width: 500px;
+            background: rgba(255, 255, 255, 0.2);
+            padding: 25px;
+            border-radius: 20px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.8);
+        }
+
+        .fundraiser-container h1 {
+            font-size: 28px;
+            font-weight: bold;
+        }
+
+        .fund-tracker {
+            font-size: 24px;
+            font-weight: bold;
+            background: rgba(255, 255, 255, 0.3);
+            padding: 15px;
+            border-radius: 10px;
+            backdrop-filter: blur(5px);
+            color: #ffcc80;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .input-group {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            margin: 20px 0;
+        }
+
+        input {
+            padding: 12px;
+            font-size: 16px;
+            border: 1px solid rgba(255, 255, 255, 0.5);
+            border-radius: 8px;
+            background: rgba(255, 255, 255, 0.3);
+            backdrop-filter: blur(5px);
+            outline: none;
+            color: white;
+            text-align: center;
+        }
+
+        button {
+            padding: 12px 18px;
+            font-size: 16px;
+            border: none;
+            border-radius: 8px;
+            background: linear-gradient(to right, #ff9966, #ff5e62);
+            color: white;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        button:hover {
+            background: linear-gradient(to right, #ff5e62, #ff9966);
+            transform: scale(1.05);
+        }
+
+        ul {
+            list-style: none;
+            padding: 0;
+            margin-top: 15px;
+        }
+
+        li {
+            background: rgba(255, 255, 255, 0.3);
+            padding: 12px;
+            border-radius: 8px;
+            margin-bottom: 8px;
+            backdrop-filter: blur(5px);
+            color: #f2f2f2;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="fundraiser-container">
+        <h1>Fundraiser Tracker</h1>
+        <p>Total Funds Raised: <span id="totalFunds" class="fund-tracker">₹0</span></p>
+        
+        <div class="input-group">
+            <input type="text" id="userName" placeholder="Enter your name">
+            <input type="number" id="donationAmount" placeholder="Enter donation amount">
+            <button onclick="donate()">Donate</button>
+        </div>
+        
+        <h3>Recent Contributions:</h3>
+        <ul id="fundHistory"></ul>
+    </div>
+</body>
+</html>

@@ -1,0 +1,1044 @@
+ @import url("https://fonts.googleapis.com/css2?family=Henny+Penny&display=swap");
+ html {
+    scroll-behavior: smooth;
+}
+        body {
+            color: aliceblue;
+            background-color: black;
+        }
+        a {
+            font-weight: 400;
+            text-decoration: none;
+            position: relative;
+        }
+        
+        a::after {
+            content: "";
+            position: absolute;
+            left: 0;
+            bottom: -2px;
+            width: 0;
+            height: 2px;
+            background-color: #cf8d08;
+            transition: width 0.3s ease-in-out;
+        }
+        
+        a:hover::after {
+            width: 100%;
+        }
+        
+        a.remove::after {
+            content: none;
+            transition: none;
+        }
+        
+
+        h3 {
+            font-family: "Henny Penny", cursive;
+            font-size: 3rem;
+            color: #f6a70a;
+            justify-self: start;
+            cursor: pointer;
+            user-select: none;
+        }
+
+        input {
+            width: 579px;
+            height: 48px;
+            padding: 10px 50px;
+            color: aliceblue;
+        }
+
+        input::placeholder {
+            color: rgba(240, 248, 255, 0.711);
+        }
+
+        .nav-Container {
+            background-color: black;
+            z-index: 111;
+        }
+
+        .nav-Container i {
+            font-size: 25px;
+            cursor: pointer;
+        }
+
+        .nav-Container .fa-filter {
+            padding: 0 30px;
+        }
+
+        .search-Area {
+            position: relative;
+        }
+        .nav-Container a:nth-of-type(3) {
+            line-height: 20px;
+            display: inline-block;
+            white-space: nowrap; 
+        }
+        
+        .search-Area i {
+            color: aliceblue;
+            font-size: 24px;
+            position: absolute;
+            z-index: 111;
+            left: 15px;
+            top: 25%;
+        }
+
+        .landing-container {
+            width: 90%;
+            height: 100vh;
+            background-image: url(./assets/landing.jpg);
+            background-repeat: no-repeat;
+            background-size: cover;
+            position: relative;
+            margin: auto;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            align-items: center;
+            text-align: center;
+            border-radius: 30px;
+            user-select: none;
+
+            & h1 {
+                font-size: 12.5rem;
+                font-family: "Henny Penny", cursive;
+                color: #f6a70a;
+                margin-bottom: 10px;
+
+            }
+        }
+
+        .landing-container::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url(./assets/landing-bg-overlay.png);
+            background-repeat: no-repeat;
+            background-size: cover;
+            opacity: 0.;
+        }
+
+        .landing-container h1,
+        .landing-container button {
+            position: relative;
+            z-index: 10;
+        }
+
+        .landing-container button {
+            background-color: black;
+            color: #f6a70a;
+            /* Gold color */
+            font-size: 1.2rem;
+            font-weight: bold;
+            padding: 12px 60px;
+            border-radius: 30px;
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s ease-in-out;
+        }
+
+        .landing-container button:hover {
+            background-color: #f6a70a;
+            color: black;
+
+        }
+
+        .landing-container p {
+            margin-top: 50px;
+            font-weight: 500;
+            background: linear-gradient(120deg, #ffffff00, #cf8d0800, #ffffff00);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        #userButton {
+            display: inline-flex;
+            justify-content: center;
+            align-items: center;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+            background-color: transparent;
+
+        }
+
+        #userButton:hover {
+            border: 2px solid #f6a70a;
+          
+
+        }
+
+        .custom-cursor {
+            position: fixed;
+            width: 30px;
+            height: 30px;
+            background-color: rgba(255, 255, 255, 0.507);
+            border-radius: 50%;
+            pointer-events: none;
+            transform: translate(-50%, -50%);
+            z-index: 1000;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 8px;
+            overflow: hidden;
+            color: black;
+            text-align: center;
+            font-family: poppins;
+        }
+
+        /* Modal Styles */
+        .modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: none;
+            justify-content: center;
+            align-items: center;
+            background: rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(5px);
+            z-index: 1000;
+            transition: opacity 0.4s ease-in-out;
+        }
+
+        .modal-content {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(15px);
+            padding: 25px;
+            border-radius: 12px;
+            text-align: center;
+            min-width: 350px;
+            position: relative;
+            box-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            transition: transform 0.3s ease-out, opacity 0.3s ease-out;
+        }
+
+        .close {
+            position: absolute;
+            top: 10px;
+            right: 15px;
+            font-size: 24px;
+            cursor: pointer;
+            color: white;
+            transition: transform 0.2s ease-in-out, color 0.2s ease-in-out;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        .input-box {
+            position: relative;
+            display: flex;
+            align-items: center;
+            width: 100%;
+            margin-bottom: 15px;
+        }
+
+        .input-box input {
+            width: 100%;
+            padding: 12px;
+            padding-right: 45px;
+            border: 1px solid rgba(255, 255, 255, 0.4);
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 8px;
+            color: white;
+            outline: none;
+        }
+
+        .toggle-password {
+            position: absolute;
+            right: 15px;
+            cursor: pointer;
+            color: white;
+        }
+
+        .error-message {
+            color: red;
+            font-size: 14px;
+            margin-top: 5px;
+        }
+
+        .remember-forgot {
+            display: flex;
+            justify-content: space-between;
+            width: 100%;
+            font-size: 13px;
+            color: white;
+            margin-bottom: 10px;
+
+        }
+
+        .remember-forgot a {
+            color: #ffd700;
+            text-decoration: none;
+        }
+
+        .remember-forgot {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 14px;
+            color: white;
+            margin-bottom: 15px;
+        }
+
+        .remember-forgot label {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            /* Adjust spacing between checkbox and text */
+            cursor: pointer;
+        }
+
+        .remember-forgot label input {
+            width: 16px;
+            /* Adjust checkbox size */
+            height: 16px;
+            cursor: pointer;
+            accent-color: #cf8d08;/
+        }
+
+        #toastContainer {
+            position: fixed;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 1001;
+        }
+
+        .toast-message {
+            background: rgba(0, 0, 0, 0.8);
+            color: white;
+            padding: 10px 20px;
+            border-radius: 5px;
+            opacity: 1;
+            transition: opacity 0.5s ease-in-out;
+            margin-bottom: 10px;
+        }
+
+        .btn {
+            background: linear-gradient(45deg, #f59e0b, #ff5733);
+            color: white;
+            border: none;
+            padding: 12px 40px;
+            cursor: pointer;
+            border-radius: 8px;
+            font-size: 16px;
+            transition: 0.3s ease;
+            margin-top: 10px;
+            margin-top: 15px;
+        }
+
+        .btn:hover {
+            background: linear-gradient(45deg, #ff5733, #f59e0b);
+        }
+
+        .modal p {
+            color: white;
+        }
+
+        .modal a {
+            color: #ffd700;
+            text-decoration: none;
+        }
+
+        /* Fade-in Animation */         
+        .fade-in {
+            animation: fadeIn 0.3s ease-in-out;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+
+            to {
+                opacity: 1;
+            }
+        }
+
+        #loginForm h2 {
+            margin-bottom: 15px;
+            text-transform: uppercase;
+            font-weight: 600;
+            padding-bottom: 10px;
+        }
+
+        #signupForm h2 {
+            margin-bottom: 15px;
+            text-transform: uppercase;
+            font-weight: 600;
+            padding-bottom: 10px;
+        }
+
+        #loginForm button {
+            margin-bottom: 10px;
+        }
+
+        #signupForm button {
+            margin-bottom: 10px;
+            src: url(./dashboard/index.html);
+        }
+
+        /***** categories *****/
+        /* Overall Category Container */
+        .Category-Container {
+            width: 100%;
+            height: 100vh;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* Chakra Image on the Left */
+        .chakra {
+            position: absolute;
+            left: 20px;
+            top: 10%;
+            transform: translateY(-50%);
+            width: 150px;
+            /* Adjust size */
+            z-index: 2;
+            /* Ensures it's above */
+        }
+
+        /* Background Image Centered */
+        .background-image {
+
+            width: 90%;
+            height: 100vh;
+            background: url("./assets/categorybackground.jpg") center/cover no-repeat;
+            position: absolute;
+            z-index: 1;
+            border-radius: 30px;
+            overflow: hidden;
+            top: 10%;
+        }
+
+        .background-image::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url(./assets/landing-bg-overlay.png);
+            background-repeat: no-repeat;
+            background-size: cover;
+            opacity: 0.9;
+            /* Adjust as needed */
+            z-index: 555;
+            border-radius: 30px;
+        }
+
+
+        /* Category Heading */
+        .Category-Container h2 {
+            font-size: 70px;
+            font-weight: bold;
+            color: white;
+            text-align: center;
+            position: relative;
+            z-index: 3;
+            margin-top: 100px;
+        }
+
+        .Category-Container h2 span {
+            color: #cf8d08;
+            /* Highlighted part */
+        }
+
+        /* Category Container */
+        .category-container {
+            width: 90%;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+            color: white;
+        }
+
+
+        .category-container h2 span {
+            color: #e6b800;
+            /* Accent color */
+        }
+
+        /* Bento Grid Layout */
+        .category-wrapper {
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            grid-template-rows: auto auto;
+            /* Two rows */
+            gap: 12px;
+            /* Space between cards */
+            width: 85%;
+            /* max-width: 1200px; */
+            margin: auto;
+            user-select: none;
+        }
+
+        /* Base Card Styles */
+        .category-card {
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;
+            color: white;
+            font-size: 1.2rem;
+            text-transform: uppercase;
+            font-weight: bold;
+            padding: 20px;
+            border-radius: 15px;
+            background-size: cover;
+            background-position: center;
+            transition: all 0.3s ease-in-out;
+            z-index: 9999;
+
+            /* Glassmorphism Effect */
+            backdrop-filter: blur(10px);
+            background: rgba(255, 255, 255, 0.1);
+            /* Semi-transparent */
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        .card1 {
+            background: url('./assets/Products/durgamaa.png') no-repeat;
+            height: 250px; /* Adjust height based on design */
+            width: 100%;
+            background-size: cover ; /* Ensures the image fully covers the area */
+            background-position: center 30%; /* Moves the image up to show the top part */
+            border-radius: 15px; /* Smooth corners */
+            padding: 15px;
+            display: flex;
+            align-items: flex-start; /* Aligns text at the top */
+        }
+        .card1 .religious {
+            position: absolute;
+            font-size: 2rem;
+            font-weight: 900;
+            color: white; /* White text */
+            -webkit-text-stroke: 1px black; /* Black stroke */
+            text-stroke: 1px black; /* Standard property */
+        }
+        
+        .card2 {
+            background: url('./assets/Products/elephantart.png') no-repeat center top/cover;
+            height: 250px;
+            width: 100%;
+            background-size: contain 30%;
+            background-position: center 30%; /* Moves image up to reveal face */
+            border-radius: 15px;
+            padding: 15px;
+            position: relative;
+            
+            
+        }
+        .card2 h2{
+            position: absolute;
+            font-size: 2rem;
+            left: 40%;
+            top: -20%;
+            -webkit-text-stroke: 1px black; /* Black stroke */
+            text-stroke: 1px black;
+        }
+        .card3 {
+            background: url('./assets/Products/tiger.png') no-repeat;
+            height: 250px;
+            width: 100%;
+            background-size: 90%; 
+            background-size: contain 30%;/* Zooms in more */
+            background-position: center 30%; /* Moves image up to reveal face */
+            border-radius: 15px;
+            padding: 15px;
+            display: flex;
+            align-items: flex-start;
+             -webkit-text-stroke: 1px black; /* Black stroke */
+            text-stroke: 1px black;
+        }
+        .card4 {
+            background: url('./assets/Products/bangdles.png') no-repeat right center/contain;
+            height: 250px;
+            width: 100%;
+            background-size: 80%;
+            position: relative; 
+            display: flex;
+            align-items: flex-end;
+            justify-content: flex-end;
+            overflow: hidden; /* Ensures no content spills out */
+        }        
+        
+        .card4 .jewelleft {
+            position: absolute;
+            font-size: 2rem;
+            font-weight: 900;
+            color: white;
+            -webkit-text-stroke: 1px black; /* White text with black stroke */
+            left: 10%; /* Pushes text to the right side */
+            top: 50%; /* Centers text vertically */
+            transform: translateY(-235%) rotate(270deg); /* Rotates to face the right */
+            white-space: nowrap; /* Prevents text from wrapping */
+        }
+        
+
+
+        /* Hover Effect */
+        .category-card:hover {
+            transform: scale(1.05);
+            opacity: 0.9;
+        }
+
+        /***** End categories *****/
+        /***** selling *****/
+        .selling-container {
+            width: 100%;
+            height: 100vh;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            z-index: 10;
+            padding-top: 50px;
+            margin-top: 10%;
+        }
+
+        /* Chakra Image on the Right */
+        .chakraright {
+            position: absolute;
+            right: 20px;
+            top: -1%;
+            transform: translateY(-50%);
+            width: 150px;
+            z-index: 204;
+        }
+
+        /* Background Image Centered */
+        .selling-image {
+            width: 90%;
+            height: 100vh;
+            background: url("./assets/topsellingbackground.jpg") center/cover no-repeat;
+            position: absolute;
+            z-index: 1;
+            border-radius: 30px;
+            overflow: hidden;
+            top: 0;
+        }
+
+        .selling-image::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url(./assets/landing-bg-overlay.png);
+            background-repeat: no-repeat;
+            background-size: cover;
+            opacity: 0.85;
+            z-index: 2;
+            border-radius: 30px;
+        }
+
+        /* Category Heading */
+        .selling-container h2 {
+            font-size: 80px;
+            font-weight: bold;
+            color: white;
+            text-align: center;
+            position: relative;
+            z-index: 100;
+            margin-bottom: 20px;
+            margin-top: 20px;
+            
+        }
+
+        .selling-container h2 span {
+            color: #cf8d08;
+            
+        }
+
+        /* Glassmorphism Product Grid */
+        .product-grid {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            flex-wrap: wrap;
+            padding: 20px;
+            position: relative;
+            z-index: 200;
+            max-width: 90%;
+        }
+
+        .product-card {
+            width: 220px;
+            height: 330px;
+            padding: 15px;
+            border-radius: 15px;
+            backdrop-filter: blur(15px);
+            background: rgba(255, 255, 255, 0.15);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            text-align: center;
+            color: white;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: space-between;
+            z-index: -1;
+            cursor: pointer;
+            transition: all 0.3s ease-in-out;   
+        }
+        .product-card:hover {
+            transform: scale(1.05);
+            opacity: 0.9;
+        }
+    
+        .product-card img {
+            width: 100%;
+            height: auto;
+            border-radius: 10px;
+        }
+        .product-card:nth-child(1) {
+            background-image: url('./assets/Products/madhubani-digitalart.jpg');
+            background-size: cover;
+            background-position: center;
+        }
+        .product-card:nth-child(2) h3 {
+            margin-top: -10px;
+            color: black;
+        }
+        .product-card:nth-child(2) {
+            background-image: url('./assets/Products/peakcock.jpg');
+           
+            background-size: cover;
+            background-position: center;
+        }
+        
+        .product-card:nth-child(3) {
+            background-image: url('./assets/Products/pabanimurla.jpg');
+            background-size: cover;
+            background-position: center;
+        }
+        
+        .product-card:nth-child(4) {
+            background-image: url('./assets/Products/kalamkarielephant.jpg');
+            background-size: cover;
+            background-position: center;
+        }
+        .product-card:nth-child(4) h3 {
+            margin-top: -10px;
+            color: black;
+        }
+        .product-card:nth-child(3) .rating{
+            margin-top: 210px;
+        }
+        .product-card:nth-child(3) .price{
+            margin-top: -3px;
+        }
+
+       .product-card h3 {
+             font-size: 20px;
+            font-weight: 400;
+            list-style: 2px;
+            font-family: 'Arial', sans-serif;
+            color: aliceblue /* Ensure a clean, readable font */
+}
+
+        .price-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .price {
+            font-size: 22px;
+            font-weight: bold;
+            margin-top: 0px;
+            color: black;
+        }
+
+
+        .rating {
+            color: rgb(252, 132, 20);
+            font-size: 12px;
+            margin-top: 235px;
+        }
+
+        /***** End selling *****/
+        /* Overall Category Container */
+        .happy-customers {
+            width: 100%;
+            height: 100vh;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+
+        }
+
+        .happy-customers .chakra-left {
+            position: absolute;
+            left: 20px;
+            transform: translateY(-50%);
+            width: 150px;
+            top: 10%;
+            z-index: 9999;
+        }
+
+        /* Section Title */
+        .happy-customers h2 {
+            font-size: 36px;
+            font-weight: bold;
+            margin-bottom: 40px;
+        }
+
+        /* Marquee Container */
+        .marquee {
+            width: 100%;
+            overflow: hidden;
+            position: relative;
+        }
+
+        /* Inner Marquee for Scrolling */
+        .marquee-inner {
+            display: flex;
+            gap: 20px;
+            width: max-content;
+            animation: marquee-scroll 15s linear infinite;
+        }
+
+        /* Individual Testimonial Cards */
+        .testimonial-card {
+            width: 280px;
+            padding: 20px;
+            border-radius: 15px;
+            backdrop-filter: blur(10px);
+            background: rgba(255, 255, 255, 0.1);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            text-align: left;
+            color: white;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            flex-shrink: 0;
+        }
+
+        /* Keyframes for Scrolling */
+        @keyframes marquee-scroll {
+            from {
+                transform: translateX(0);
+            }
+
+            to {
+                transform: translateX(-50%);
+            }
+        }
+
+
+        /* Marquee Animation */
+
+        /* Happy Customers Section */
+
+        /***** Trash Treasure *****/
+
+        .trash-treasures {
+            width: 100%;
+            height: 100vh;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+        .trash-treasures h2 {
+            font-size: 80px;
+            font-weight: bold;
+            color: white;
+            text-align: center;
+            position: relative;
+            z-index: 100;
+            margin-bottom: 20px;
+            margin-top: 20px;
+          & span {
+            color: #cf8d08;
+          }
+        }
+        .trash-treasures .chakra-right {
+            position: absolute;
+            right: 20px;
+            transform: translateY(-50%);
+            width: 150px;
+            top: 10%;
+            z-index: 9999;
+        }
+
+        /***** product *****/ 
+        
+        .trash-treasures .product-card:nth-child(1) {
+            background-image: url('./assets/Products/metaldj.jpg');
+            background-size: cover;
+            background-position: center 10%;
+            color: aliceblue;
+            object-fit: cover;
+        }
+        .trash-treasures .product-card:nth-child(1) .price{
+            color: aliceblue;
+        }
+        .trash-treasures .product-card:nth-child(2) h3 {
+            margin-top: -10px;
+            color: black;
+        }
+        
+        .trash-treasures .product-card:nth-child(2) {
+            background-image: url('./assets/Products/metalcanstand.jpg');
+            background-size: cover;
+            background-position: center;
+        }
+        
+        .trash-treasures .product-card:nth-child(3) {
+            background-image: url('./assets/Products/DiyColorfulplacemats.jpg');
+            background-size: cover;
+            background-position: center;
+        }
+        .trash-treasures .product-card:nth-child(3) h3{
+            color: rgb(255, 255, 255);
+        }
+        .trash-treasures .product-card:nth-child(3) .price{
+            color: aliceblue;
+        }
+        
+        .trash-treasures .product-card:nth-child(4) {
+            background-image: url('./assets/Products/chainlamp.jpg');
+            background-size: cover;
+            background-position: center;
+        }
+        
+        .trash-treasures .product-card:nth-child(4) h3 {
+            margin-top: -10px;
+            color: black;
+        }
+        
+        .trash-treasures .product-card:nth-child(3) .rating {
+            margin-top: 210px;
+        }
+        
+        .trash-treasures .product-card:nth-child(3) .price {
+            margin-top: -3px;
+        }
+        
+
+                 /***** End product *****/
+
+
+        /* Background Image Centered */
+        .trash-image {
+            width: 90%;
+            height: 100vh;
+            background: url("./assets/trashtreasurebackground.jpg") center/cover no-repeat;
+            position: absolute;
+            z-index: 1;
+            border-radius: 30px;
+            overflow: hidden;
+            top: 10%;
+        }
+
+        .trash-image::before {
+            /* Corrected class name */
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url(./assets/landing-bg-overlay.png);
+            background-repeat: no-repeat;
+            background-size: cover;
+            opacity: 0.9;
+            /* Adjust opacity to control overlay visibility */
+            z-index: 555;
+            border-radius: 30px;
+        }
+
+
+        /***** End Trash Treasure *****/
+  /***** footer *****/ 
+  
+  footer {
+    background: #000;
+    padding: 40px;
+    text-align: left;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 100px;
+}
+.footer-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    max-width: 1100px;
+    width: 100%;
+}
+.footer-section {
+    flex: 1;
+    margin: 10px;
+    min-width: 200px;
+}
+.footer-section h3 {
+    margin-bottom: 15px;
+    font-family: 'Poppins', sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+    letter-spacing: 1px;
+}
+.footer-section ul {
+    list-style: none;
+}
+.footer-section ul li {
+    margin-bottom: 8px;
+}
+.footer-section a {
+    color: #fff;
+    text-decoration: none;
+    font-size: 14px;
+}
+.social-icons {
+    margin: 20px 0;
+}
+.social-icons a {
+    margin: 0 5px;
+    color: #fff;
+    font-size: 18px;
+    background: #222;
+    padding: 8px;
+    border-radius: 50%;
+    display: inline-block;
+}
+.payment-icons {
+    display: flex;
+    gap: 10px;
+    margin-top: 10px;
+}
+.payment-icons img {
+    width: 150%;
+}
+.footer-bottom {
+    margin-top: 20px;
+    font-size: 12px;
+    text-align: center;
+}
+  /***** End footer *****/
+  

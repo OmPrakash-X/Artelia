@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Live Auction System</title>
+    
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/11.4.0/firebase-app.js";
+        import { getDatabase, ref, set, push, onValue } from "https://www.gstatic.com/firebasejs/11.4.0/firebase-database.js";
+
+        const firebaseConfig = {
+            apiKey: "AIzaSyBZ15hw...",
+            authDomain: "artelia-auction.firebaseapp.com",
+            databaseURL: "https://artelia-auction-default-rtdb.firebaseio.com/",
+            projectId: "artelia-auction",
+            storageBucket: "artelia-auction.appspot.com",
+            messagingSenderId: "1081319382242",
+            appId: "1:1081319382242:web:a046b7576c1a3c8eb492bb",
+            measurementId: "G-P1GSTLSQ28"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const database = getDatabase(app);
+
+        let highestBid = 0;
+        let auctionEndTime = new Date().getTime() + (10 * 60 * 1000);
+
+        function updateCountdown() {
+            let now = new Date().getTime();
+            let remaining = auctionEndTime - now;
+
+            if (remaining <= 0) {
+                document.getElementById("countdown").innerText = "Auction Ended";
+                return;
+            }
+
+            let minutes = Math.floor((remaining % (1000 * 60 * 60)) / (1000 * 60));
+            let seconds = Math.floor((remaining % (1000 * 60)) / 1000);
+            document.getElementById("countdown").innerText = `${minutes}m ${seconds}s remaining`;
+        }
+
+        setInterval(updateCountdown, 1000);
+
+        window.placeBid = function () {
+            const userName = document.getElementById("userName").value.trim();
+            const bidAmount = parseFloat(document.getElementById("bidAmount").value);
+
+            if (userName === "" || isNaN(bidAmount) || bidAmount <= 0) {
+                showToast("⚠️ Please enter a valid name and bid amount!", "warning");
+                return;
+            }
+
+            if (bidAmount <= highestBid) {
+                showToast(`🚨 Your bid must be higher than ₹${highestBid}!`, "error");
+                return;
+            }
+
+            const bidsRef = ref(database, "bids");
+            const newBidRef = push(bidsRef);
+
+            set(newBidRef, {
+                user: userName,
+                bidAmount: bidAmount,
+                timestamp: new Date().toISOString()
+            })
+            .then(() => {
+                showToast("✅ Bid placed successfully!", "success");
+                document.getElementById("bidAmount").value = "";
+                document.getElementById("userName").value = "";  
+            })
+            .catch((error) => {
+                showToast("❌ Error placing bid. Try again!", "error");
+                console.error("Error placing bid:", error);
+            });
+        };
+
+        function loadBids() {
+            const bidsRef = ref(database, "bids");
+
+            onValue(bidsRef, (snapshot) => {
+                if (snapshot.exists()) {
+                    const bids = Object.values(snapshot.val());
+                    highestBid = bids.reduce((max, bid) => bid.bidAmount > max ? bid.bidAmount : max, 0);
+                    let bidList = "";
+
+                    bids.forEach(bid => {
+                        const highlight = bid.bidAmount === highestBid ? "highest-bid" : "";
+                        bidList += `<li class="${highlight}">${bid.user} bid ₹${bid.bidAmount} at ${new Date(bid.timestamp).toLocaleString()}</li>`;
+                    });
+
+                    document.getElementById("bidHistory").innerHTML = bidList;
+                    document.getElementById("currentBid").innerText = `₹${highestBid}`;
+                } else {
+                    document.getElementById("bidHistory").innerHTML = "<li>No bids yet.</li>";
+                    document.getElementById("currentBid").innerText = "₹0";
+                }
+            });
+        }
+
+        function showToast(message, type) {
+            const toast = document.createElement("div");
+            toast.className = `toast ${type}`;
+            toast.innerHTML = message;
+            document.body.appendChild(toast);
+            setTimeout(() => { toast.remove(); }, 3000);
+        }
+
+        window.onload = loadBids;
+    </script>
+
+    <style>
+            /* Artelia Auction UI - Elegant & Modern */
+/* Artelia Auction UI - Elegant & Modern */
+body {
+    font-family: 'Poppins', sans-serif;
+    text-align: center;
+    margin: 0;
+    padding: 0;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    position: relative;
+    color: #333;
+}
+
+/* Background Image with Blur */
+body::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: url(./topsellingbackground.jpg) no-repeat center center/cover;
+    filter: blur(10px);
+    z-index: -1;
+}
+
+/* Auction Container with Transparent Background */
+.auction-container {
+    max-width: 500px;
+    background: rgba(255, 255, 255, 0.2);
+    padding: 25px;
+    border-radius: 20px;
+    backdrop-filter: blur(0px); /* Remove blur from container */
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+    margin: auto;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+
+.auction-item img {
+    width: 30%;
+    border-radius: 15px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+.input-group {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+    margin: 20px 0;
+}
+
+input {
+    padding: 12px;
+    font-size: 16px;
+    border: 1px solid rgba(255, 255, 255, 0.5);
+    border-radius: 8px;
+    background: rgba(255, 255, 255, 0.3);
+    backdrop-filter: blur(5px);
+    outline: none;
+    color: #333;
+    width: 60%;
+}
+
+button {
+    padding: 12px 18px;
+    font-size: 16px;
+    border: none;
+    border-radius: 8px;
+    background: linear-gradient(to right, #ff9966, #ff5e62);
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+button:hover {
+    background: linear-gradient(to right, #ff5e62, #ff9966);
+    transform: scale(1.05);
+}
+
+ul {
+    list-style: none;
+    padding: 0;
+    margin-top: 15px;
+}
+
+li {
+    background: rgba(255, 255, 255, 0.3);
+    padding: 12px;
+    border-radius: 8px;
+    margin-bottom: 8px;
+    backdrop-filter: blur(5px);
+    color: #333;
+}
+
+.highest-bid {
+    background: #ffcc80;
+    font-weight: bold;
+    color: #d35400;
+}
+
+.current-bid {
+    font-size: 24px;
+    font-weight: bold;
+    color: #f2f2f2;
+    text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.2);
+}
+
+.toast {
+    position: fixed;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(0, 0, 0, 0.8);
+    color: white;
+    padding: 12px 20px;
+    border-radius: 10px;
+    box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.2);
+    opacity: 0.9;
+    animation: fadeIn 0.5s ease-in-out;
+}
+.countdown-timer {
+    color: white;
+}
+
+.toast.warning { background: orange; }
+.toast.error { background: red; }
+.toast.success { background: green; }
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateX(-50%) translateY(20px); }
+    to { opacity: 0.9; transform: translateX(-50%) translateY(0); }
+}
+    </style>
+</head>
+<body>
+    <div class="auction-container">
+        <h1>Live Auctions</h1>
+        <p id="countdown" class="countdown-timer">Loading...</p>
+        <div class="auction-item">
+            <img src="./tiger.png" alt="Auction Item">
+            <h3>Antique Art Piece</h3>
+            <p>Current Highest Bid: <span id="currentBid" class="current-bid">₹0</span></p>
+        </div>
+        <div class="input-group">
+            <input type="text" id="userName" placeholder="Enter your name">
+            <input type="number" id="bidAmount" placeholder="Enter bid amount">
+            <button onclick="placeBid()">Place Bid</button>
+        </div>
+        <h3>Bid History:</h3>
+        <ul id="bidHistory"></ul>
+    </div>
+</body>
+</html>

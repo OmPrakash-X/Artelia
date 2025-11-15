@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Artelia</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+        integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="output.css" />
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div class="custom-cursor"></div>
+    <div id="Main-Container">
+        <div class="nav-Container flex items-center p-7 gap-6 text-m">
+            <h3 class="flex-start pr-10 pl-5 text-white"> <a href="index.html" class="remove"> Artelia</a></h3>
+            <a href="./pages/auction.html" class="links pl-3 text-[20px] text-white">Auctions</a>
+            <a href="./pages/DashBoard.html" class="links text-[20px] text-white">Orders</a>
+            <a href="#trash-treasures" class="links text-[20px] text-white">Trash Treasures</a>
+            <a href="./cart/cart.html" class="links text-[20px] text-white">Categories</a>
+            <a href="./dashboard/index.html" class="links text-[20px] text-white">Dashboard</a>
+            <!-- <div class="search-Area">
+                <i class="fa-solid fa-magnifying-glass"></i>
+                <input type="text" placeholder="Search for Products..."
+                    class="backdrop-blur-lg bg-white/10 text-white placeholder-white border border-white rounded-full p-2" />
+            </div> -->
+            <i class="fa-solid fa-filter"></i>
+            <button id="userButton" class="text-white text-2xl">
+                <i class="fa-solid fa-circle-user"></i>
+            </button>
+        </div>
+
+        <section>
+            <div class="cursor">
+                <div class="landing-container">
+                    <div id="cursor-land">
+                        <h1 class="contai">Artelia</h1>
+                        <button> <a href="./cart/cart.html">Shop Now</a></button>
+                        <p class="text-4xl text-white z-10">Connecting <br> <span
+                                class="pl-3">Creativity,</span><br>Craft & Community</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- Authentication Modal -->
+        <div id="authModal" class="modal">
+            <div class="modal-content fade-in">
+                <span class="close">&times;</span>
+
+                <!-- Login Form -->
+                <div id="loginForm">
+                    <h2 style="color: white; margin-bottom: 15px ;">Login</h2>
+                    <div class="input-box">
+                        <input type="text" id="loginUsername" placeholder="Username or Email" required>
+                    </div>
+                    <div class="input-box">
+                        <input type="password" id="loginPassword" placeholder="Password" required>
+                        <span class="toggle-password" onclick="togglePassword('loginPassword', this)">
+                            <i class="fas fa-eye"></i>
+                        </span>
+                    </div>
+                    <div class="remember-forgot">
+                        <label><input type="checkbox" id="rememberMe"> Remember me</label>
+                        <a href="#" id="forgotPassword">Forgot Password?</a>
+                    </div>
+                    <p class="error-message" id="loginError"></p>
+                    <button class="btn" id="submitd" style="margin-top: 15px;" onclick="validateLogin()">Login</button>
+                    <p style="margin-top: 10px;">Don't have an account? <a href="#" id="showSignup">Sign up</a></p>
+                </div>
+
+                <!-- Signup Form -->
+                <div id="signupForm" class="hidden">
+                    <h2 style="color: white; margin-bottom: 15px;">Sign Up</h2>
+                    <div class="input-box">
+                        <input type="text" id="signupUsername" placeholder="Username" required>
+                    </div>
+                    <div class="input-box">
+                        <input type="email" id="signupEmail" placeholder="Email" required>
+                    </div>
+                    <div class="input-box">
+                        <input type="password" id="signupPassword" placeholder="Password" required>
+                        <span class="toggle-password" onclick="togglePassword('signupPassword', this)">
+                            <i class="fas fa-eye"></i>
+                        </span>
+                    </div>
+                    <p class="error-message" id="signupError"></p>
+                    <button class="btn" id="button" style="margin-top: 15px;" onclick="validateSignup()">Sign
+                        Up</button>
+                    <p style="margin-top: 10px;">Already have an account? <a href="#" id="showLogin">Login</a></p>
+                </div>
+            </div>
+        </div>
+        <div id="toastContainer"></div>
+
+        <section class="Category-Container">
+            <img src="./assets/chakra.png" alt="Chakra" class="chakra">
+
+            <h2><span>Browse</span> Popular <span>Categories</span></h2>
+
+            <div class="background-image"></div>
+
+            <div class="category-wrapper">
+                <div class="category-card card1">
+                    <h2 class="religious">Religious <br> Idols</h2>
+                </div>
+                <div class="category-card card2">
+                    <h2 class="paint">Paintings</h2>
+                </div>
+                <div class="category-card card3">
+                    <h2>Sculptures</h2>
+                </div>
+                <div class="category-card card4">
+                    <h2 class="jewelleft">Jewellery</h2>
+                </div>
+            </div>
+        </section>
+        <div class="selling-container">
+            <img src="./assets/chakraright.png" alt="Chakra" class="chakraright">
+            <h2>Top <span>Selling</span></h2>
+            <div class="selling-image"></div>
+
+            <div class="product-grid">
+                <div class="product-card">
+                    <h3>Madhubani Art </h3>
+                    <div class="rating">⭐⭐⭐⭐☆ 4.5/5</div>
+                    <div class="price">$120</div>
+                </div>
+                <div class="product-card">
+                    <h3>Kalam Kari</h3>
+                    <div class="rating">⭐⭐⭐☆☆ 3.5/5</div>
+                    <div class="price">
+                        <span class="price">$260</span>
+                    </div>
+                </div>
+                <div class="product-card">
+                    <h3>Pabani Murla</h3>
+                    <div class="rating">⭐⭐⭐⭐☆ 4.5/5</div>
+                    <div class="price">$180</div>
+                </div>
+                <div class="product-card">
+                    <h3>Kalamkari Elephant</h3>
+                    <div class="rating">⭐⭐⭐⭐☆ 4.5/5</div>
+                    <div class="price">
+                        <span class="price">$160</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <section class="happy-customers">
+            <!-- Chakra Image on Left -->
+            <img src="assets/chakra.png" alt="Chakra Design" class="chakra-left">
+
+            <!-- Section Title -->
+            <h2>OUR HAPPY CUSTOMERS</h2>
+
+            <!-- Testimonials Marquee Container -->
+            <div class="marquee">
+                <div class="marquee-inner">
+                    <!-- Testimonial Cards -->
+                    <div class="testimonial-card">
+                        <div class="rating">⭐⭐⭐⭐⭐</div>
+                        <h3>Sarah M. <span>✔️</span></h3>
+                        <p>“I'm blown away by the quality and style of the clothes I received from Shop.co...”</p>
+                    </div>
+
+                    <div class="testimonial-card">
+                        <div class="rating">⭐⭐⭐⭐⭐</div>
+                        <h3>Alex K. <span>✔️</span></h3>
+                        <p>“Finding clothes that align with my personal style used to be a challenge until I found
+                            Shop.co...”</p>
+                    </div>
+
+                    <div class="testimonial-card">
+                        <div class="rating">⭐⭐⭐⭐⭐</div>
+                        <h3>James L. <span>✔️</span></h3>
+                        <p>“As someone always on the lookout for unique fashion pieces, I'm thrilled to have found
+                            Shop.co...”</p>
+                    </div>
+
+                    <div class="testimonial-card">
+                        <div class="rating">⭐⭐⭐⭐⭐</div>
+                        <h3>Olivia R. <span>✔️</span></h3>
+                        <p>“I love the variety of styles available! Every purchase has been fantastic...”</p>
+                    </div>
+
+                    <div class="testimonial-card">
+                        <div class="rating">⭐⭐⭐⭐⭐</div>
+                        <h3>David T. <span>✔️</span></h3>
+                        <p>“Absolutely amazing quality and service. Shop.co is my go-to store now...”</p>
+                    </div>
+
+                    <div class="testimonial-card">
+                        <div class="rating">⭐⭐⭐⭐⭐</div>
+                        <h3>Emma W. <span>✔️</span></h3>
+                        <p>“The latest collection is stunning! I keep coming back for more...”</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+        <div class="trash-treasures" id="trash-treasures">
+            <img src="./assets/chakraright.png" alt="Chakra" class="chakra-right">
+            <h2>Trash<span>Treasures</span></h2>
+            <div class="trash-image"></div>
+
+            <div class="product-grid">
+                <div class="product-card">
+                    <h3>Metal DJ</h3>
+                    <div class="rating">⭐⭐⭐⭐☆ 4.5/5</div>
+                    <div class="price">$120</div>
+                </div>
+                <div class="product-card">
+                    <h3>Metal Can Stand</h3>
+                    <div class="rating">⭐⭐⭐☆☆ 3.5/5</div>
+                    <div class="price">
+                        <span class="price">$260</span>
+                    </div>
+                </div>
+                <div class="product-card">
+                    <h3>DIY Colorful MAt</h3>
+                    <div class="rating">⭐⭐⭐⭐☆ 4.5/5</div>
+                    <div class="price">$180</div>
+                </div>
+                <div class="product-card">
+                    <h3>Chain Lamp</h3>
+                    <div class="rating">⭐⭐⭐⭐☆ 4.5/5</div>
+                    <div class="price">
+                        <span class="price">$160</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <footer>
+            <div class="footer-container">
+                <div class="footer-section">
+                    <h2 style="font-family: 'Henny Penny', cursive; color: #f67c03; font-size: 24px;">Artelia</h2>
+                    <p style="font-size: 14px; max-width: 250px;">We have clothes that suit your style and which you're
+                        proud to wear. From women to men.</p>
+                    <div class="social-icons">
+                        <a href="#">⚫</a>
+                        <a href="#">⚫</a>
+                        <a href="#">⚫</a>
+                        <a href="#">⚫</a>
+                    </div>
+                </div>
+                <div class="footer-section">
+                    <h3>COMPANY</h3>
+                    <ul>
+                        <li><a href="#">About</a></li>
+                        <li><a href="#">Features</a></li>
+                        <li><a href="#">Works</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>HELP</h3>
+                    <ul>
+                        <li><a href="#">Customer Support</a></li>
+                        <li><a href="#">Delivery Details</a></li>
+                        <li><a href="#">Terms & Conditions</a></li>
+                        <li><a href="#">Privacy Policy</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>FAQ</h3>
+                    <ul>
+                        <li><a href="#">Account</a></li>
+                        <li><a href="#">Manage Deliveries</a></li>
+                        <li><a href="#">Orders</a></li>
+                        <li><a href="#">Payments</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>RESOURCES</h3>
+                    <ul>
+                        <li><a href="#">YouTube Playlist</a></li>
+                    </ul>
+                    <div class="payment-icons">
+                        <img src="./assets/payments.png" alt="">
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                Artelia &copy; 2025 All Rights Reserved
+            </div>
+        </footer>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"
+        integrity="sha512-7eHRwcbYkK4d9g/6tD/mhkf++eoTHwpNM9woBxtPUBWm67zeAfFC+HrdoE2GanKeocly/VxeLvIqwvCdk7qScg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="script.js"></script>
+</body>
+
+</html>

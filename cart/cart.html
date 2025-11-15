@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Artelia - Pattachitra Paintings</title>
+    <link rel="stylesheet" href="./style.css">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <a href="#" class="logo">Artelia</a>
+                <button class="mobile-menu-toggle" id="menuToggle">☰</button>
+                <nav class="nav-items" id="navMenu">
+                    <a href="#">Cart</a>
+                    <a href="#">Orders</a>
+                    <a href="#">New Arrivals</a>
+                    <a href="#">Categories</a>
+                </nav>
+                <div class="search-cart">
+                    <div class="search-box">
+                        <span class="search-icon">🔍</span>
+                        <input type="text" id="searchInput" placeholder="Search for products..."/>
+                        <div id="suggestions" class="suggestions-container"></div>
+                    </div>
+                    <a href="#" class="cart-icon">🛒</a>
+                    <a href="#" class="user-icon">👤</a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main class="main-content">
+        <div class="container">
+            <h1 class="page-title">Pattachitra Paintings</h1>
+            
+            <button class="mobile-filter-toggle" id="filterToggle">Show Filters</button>
+            
+            <div class="content-wrapper">
+                <!-- Sidebar -->
+                <aside class="sidebar" id="sidebar">
+                    <button class="close-sidebar" id="closeSidebar">✕</button>
+                    
+                    <div class="sidebar-section">
+                        <div class="categories-all">
+                            <span class="all-cat">All Categories</span>
+                            <span class="sidebar-badge">18</span>
+                        </div>
+                    </div>
+
+                    <div class="sidebar-section">
+                        <h3 class="sidebar-title">Top Listing</h3>
+                        <a href="#" class="sidebar-link filter-link" data-category="top" data-filter="new">New Arrivals</a>
+                        <a href="#" class="sidebar-link filter-link" data-category="top" data-filter="most-viewed">Most Viewed</a>
+                        <a href="#" class="sidebar-link filter-link" data-category="top" data-filter="trending">Trending Items</a>
+                    </div>
+
+                    <div class="sidebar-section">
+                        <h3 class="sidebar-title">Price</h3>
+                        <div class="price-range">
+                           
+                            <div class="price-inputs">
+                                <input type="text" class="price-input" id="minPrice" value="$50">
+                                <input type="text" class="price-input" id="maxPrice" value="$250">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="sidebar-section">
+                        <h3 class="sidebar-title">Paintings</h3>
+                        <a href="#" class="sidebar-link filter-link" data-category="paintings" data-filter="kalamkari">Kalamkari Painting</a>
+                        <a href="#" class="sidebar-link filter-link" data-category="paintings" data-filter="gond">Gond Painting</a>
+                        <a href="#" class="sidebar-link filter-link" data-category="paintings" data-filter="warli">Warli Painting</a>
+                        <a href="#" class="sidebar-link filter-link" data-category="paintings" data-filter="madhubani">Madhubani Painting</a>
+                        <a href="#" class="sidebar-link filter-link" data-category="paintings" data-filter="kerala">Kerala Mural Painting</a>
+                        <a href="#" class="sidebar-link filter-link" data-category="paintings" data-filter="tanjore">Tanjore Painting</a>
+                        <a href="#" class="sidebar-link filter-link" data-category="paintings" data-filter="miniature">Miniature Painting</a>
+                    </div>
+
+                    <div class="sidebar-section">
+                        <h3 class="sidebar-title">Sculptures</h3>
+                        <a href="#" class="sidebar-link filter-link" data-category="sculptures" data-filter="clay">Clay Sculptures</a>
+                        <a href="#" class="sidebar-link filter-link" data-category="sculptures" data-filter="metal">Metal Sculptures</a>
+                        <a href="#" class="sidebar-link filter-link" data-category="sculptures" data-filter="religious">Religious Idols</a>
+                        <a href="#" class="sidebar-link filter-link" data-category="sculptures" data-filter="stone">Stone Sculptures</a>
+                        <a href="#" class="sidebar-link filter-link" data-category="sculptures" data-filter="wood">Wood Carvings</a>
+                    </div>
+
+                    <div class="sidebar-section">
+                        <h3 class="sidebar-title">Jewellery</h3>
+                        <a href="#" class="sidebar-link filter-link" data-category="jewellery" data-filter="bangles">Bangles</a>
+                        <a href="#" class="sidebar-link filter-link" data-category="jewellery" data-filter="bead">Bead Jewellery</a>
+                        <a href="#" class="sidebar-link filter-link" data-category="jewellery" data-filter="earrings">Earrings</a>
+                        <a href="#" class="sidebar-link filter-link" data-category="jewellery" data-filter="necklace">Necklace</a>
+                        <a href="#" class="sidebar-link filter-link" data-category="jewellery" data-filter="rings">Rings</a>
+                        <a href="#" class="sidebar-link filter-link" data-category="jewellery" data-filter="silver">Silver Jewellery</a>
+                    </div>
+
+                    <div class="sidebar-section">
+                        <h3 class="sidebar-title">Decorative Items</h3>
+                        <a href="#" class="sidebar-link filter-link" data-category="decorative" data-filter="appliques">Appliques</a>
+                        <a href="#" class="sidebar-link filter-link" data-category="decorative" data-filter="dhokra">Dhokra Products/crafts</a>
+                        <a href="#" class="sidebar-link filter-link" data-category="decorative" data-filter="lamps">Lamps</a>
+                        <a href="#" class="sidebar-link filter-link" data-category="decorative" data-filter="masks">Masks</a>
+                        <a href="#" class="sidebar-link filter-link" data-category="decorative" data-filter="rugs">Rugs and Carpets</a>
+                        <a href="#" class="sidebar-link filter-link" data-category="decorative" data-filter="linen">Table Linen/textiles</a>
+                        <a href="#" class="sidebar-link filter-link" data-category="decorative" data-filter="pottery">Vases and Pottery</a>
+                        <a href="#" class="sidebar-link filter-link" data-category="decorative" data-filter="wall">Wall Hangings</a>
+                    </div>
+
+                    <button class="filters-button" id="applyFilters">Apply Filters</button>
+                    
+                    <button class="reset-filters-button" id="resetFilters">Reset Filters</button>
+                </aside>
+
+                <!-- Products Grid -->
+                <div class="products-grid">
+                    <div class="active-filters" id="activeFilters">
+                       
+                        <!-- Active filters will appear here -->
+                    </div>
+                    
+                    <div class="products-list" id="productsList">
+                      
+                        <!-- Products will be loaded here by JavaScript -->
+                    </div>
+
+                    <!-- Pagination -->
+                    <div class="pagination" id="pagination">
+                        <a href="#" class="page-button active">1</a>
+                        <a href="#" class="page-button">2</a>
+                        <a href="#" class="page-button">3</a>
+                        <a href="#" class="page-button">4</a>
+                        <a href="#" class="page-button">5</a>
+                        <a href="#" class="prev-next">Next »</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Product Modal -->
+    <div id="productModal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <div class="modal-body" id="modalBody">
+                <!-- Product details will be loaded here -->
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <div class="footer-logo">Artelia</div>
+                    <p class="footer-description">
+                        Artelia is a global online marketplace where people can make, sell, buy and collect unique items across the global regions.
+                    </p>
+                    <div class="social-icons">
+                        <a href="#" class="social-icon">f</a>
+                        <a href="#" class="social-icon">t</a>
+                        <a href="#" class="social-icon">in</a>
+                        <a href="#" class="social-icon">P</a>
+                    </div>
+                </div>
+
+                <div class="footer-section">
+                    <h3>COMPANY</h3>
+                    <div class="footer-links">
+                        <a href="#">About</a>
+                        <a href="#">Newsroom</a>
+                        <a href="#">Investors</a>
+                        <a href="#">Careers</a>
+                    </div>
+                </div>
+
+                <div class="footer-section">
+                    <h3>HELP</h3>
+                    <div class="footer-links">
+                        <a href="#">Customer Support</a>
+                        <a href="#">Delivery Details</a>
+                        <a href="#">Terms & Conditions</a>
+                        <a href="#">Privacy Policy</a>
+                    </div>
+                </div>
+
+                <div class="footer-section">
+                    <h3>FAQ</h3>
+                    <div class="footer-links">
+                        <a href="#">Account</a>
+                        <a href="#">Manage Deliveries</a>
+                        <a href="#">Orders</a>
+                        <a href="#">Payments</a>
+                    </div>
+                </div>
+
+                <div class="footer-section">
+                    <h3>RESOURCES</h3>
+                    <div class="footer-links">
+                        <a href="#">Product Finder</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <div class="footer-copyright">
+                    © 2023 All Rights Reserved
+                </div>
+                <div class="payment-methods">
+                    <div class="payment-icon">Visa</div>
+                    <div class="payment-icon">MC</div>
+                    <div class="payment-icon">Amex</div>
+                    <div class="payment-icon">PP</div>
+                    <div class="payment-icon">AP</div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="./script.js"></script>
+</body>
+</html>
